@@ -127,3 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+openai.key
+response.txt
+python3.8/
