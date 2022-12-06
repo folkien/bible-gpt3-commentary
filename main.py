@@ -4,6 +4,8 @@ import openai
 import sys
 from helpers.LoggingSetup import loggingSetup
 
+# @TODO Get Ewangelia from https://deon.pl/czytania
+
 
 def SetupLogging():
     ''' Setup logging during application.'''
