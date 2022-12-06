@@ -15,7 +15,7 @@ def SetupLogging():
 SetupLogging()
 
 # Open AI prompt message creation
-header = f'Napisz komentarz do fragmentu. Komentarz napisz w formie wstęp, rozwinięcie, zakończenie. Dodaj do komentarza 3 cytaty świętych Kościoła:'
+header = f'Napisz w 3 akapitach, komentarz do poniższego fragmentu Słowa Bożego. Użyj w tekście 3 cytatów świętych Kościoła. Fragment:'
 bibletext = f'Tak bowiem Bóg umiłował świat, że Syna swego Jednorodzonego dał, aby każdy, kto w Niego wierzy, nie zginął, ale miał życie wieczne.(J3, 16)'
 message = f'In:{header}{bibletext}\n Out:'
 
@@ -32,7 +32,7 @@ response = openai.Completion.create(
     model='text-davinci-003',
     prompt=message,
     temperature=0,
-    max_tokens=1024,
+    max_tokens=2048,
     top_p=1,
     frequency_penalty=0.0,
     presence_penalty=0.0,
