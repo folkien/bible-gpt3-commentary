@@ -3,11 +3,37 @@
     every post named with date.
 '''
 from dataclasses import asdict, dataclass, field
-from datetime import date
+import dataclasses
+from datetime import date, timedelta
+import datetime
 import json
 import os
 
 from models.Post import Post
+
+
+class EnhancedJSONEncoder(json.JSONEncoder):
+    '''Enhanced JSON encoder with dataclasses support.'''
+
+    def default(self, o):
+        ''' Method to default dataclass.'''
+        # Set : Json
+        if (isinstance(o, (set))):
+            return list(o)
+
+        # Dataclass : Json.
+        if dataclasses.is_dataclass(o):
+            return dataclasses.asdict(o)
+
+        # Datetime : Json
+        if (isinstance(o, (datetime, date))):
+            return o.isoformat()
+
+        # Timedelta : Json
+        if (isinstance(o, timedelta)):
+            return str(o.total_seconds())
+
+        return super().default(o)
 
 
 @dataclass
@@ -72,7 +98,7 @@ class PostDatabase:
         # Save file
         with open(filePath, 'w') as fileObject:
             json.dump(asdict(post), fileObject,
-                      indent=4, ensure_ascii=False)
+                      indent=4, ensure_ascii=False, cls=EnhancedJSONEncoder)
 
         # Return success
         return True
@@ -85,7 +111,8 @@ class PostDatabase:
         # Save file
         with open(filePath, 'w') as fileObject:
             # Dump post as json
-            json.dump(asdict(post), fileObject, indent=4, ensure_ascii=False)
+            json.dump(asdict(post), fileObject, indent=4,
+                      ensure_ascii=False,  cls=EnhancedJSONEncoder)
 
         # Return success
         return True
