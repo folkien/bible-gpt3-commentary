@@ -45,3 +45,6 @@ if __name__ == '__main__':
     # Save media post view as temporary object
     with open('temp/post.txt', 'w') as fileObject:
         fileObject.write(ViewPost.View(post))
+
+    # Post media post to social media
+    # TODO
