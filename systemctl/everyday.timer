@@ -1,0 +1,10 @@
+[Unit]
+Description=Run everyday
+
+[Timer]
+OnBootSec=15m
+OnCalendar=00/24:00
+Unit=everyday.service
+
+[Install]
+WantedBy=timers.target

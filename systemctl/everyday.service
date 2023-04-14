@@ -1,0 +1,6 @@
+[Unit]
+Description="Service called everyday"
+
+[Service]
+ExecStart=/usr/bin/everyday.sh
+EnvironmentFile=/etc/scripts.env
