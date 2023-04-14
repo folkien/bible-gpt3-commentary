@@ -132,3 +132,4 @@ response.txt
 python3.8/
 .settings/
 .env
+.vscode/
