@@ -5,6 +5,8 @@ import sys
 from helpers.CommentaryGPT import get_gpt_commentary, get_gpt_test
 from helpers.LoggingSetup import loggingSetup
 from helpers.ReadingsFetcherDeon import get_bible_reading
+from models.Post import Post
+from views.ViewPost import ViewPost
 
 
 def SetupLogging():
@@ -36,3 +38,10 @@ if __name__ == '__main__':
     # Save temporary object (developer debuging)
     json.dump(asdict(commentary), open('temp/commentary.json', 'w'),
               indent=4, ensure_ascii=False)
+
+    # Create media post
+    post = Post(readings=readings, commentary=commentary)
+
+    # Save media post view as temporary object
+    with open('temp/post.txt', 'w') as fileObject:
+        fileObject.write(ViewPost.View(post))

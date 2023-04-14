@@ -4,7 +4,7 @@ import ast
 import logging
 import os
 import openai
-from helpers.Commentary import Commentary
+from models.Commentary import Commentary
 
 # Get Open AI key from env
 openai.api_key = os.environ.get('OPENAI_API_KEY', None)

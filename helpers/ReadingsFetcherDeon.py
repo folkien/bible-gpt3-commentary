@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import logging
 
-from helpers.Readings import Readings
+from models.Readings import Readings
 
 
 def get_bible_reading():
