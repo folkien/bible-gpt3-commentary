@@ -13,7 +13,7 @@ class Post:
     ''' Dataclass for readings and commentary media post.'''
     readings: Readings = None
     commentary: Commentary = None
-    date: date = field(init=False, default_factory=date.today)
+    date: date = field(init=True, default_factory=date.today)
 
     def __post_init__(self):
         ''' Checks if all fields are not None '''
@@ -22,3 +22,6 @@ class Post:
 
         if (self.commentary is None):
             raise ValueError('Commentary is None!')
+
+        if (isinstance(self.date, (str))):
+            self.date = date.fromisoformat(self.date)

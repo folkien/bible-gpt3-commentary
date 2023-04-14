@@ -1,3 +1,4 @@
+import argparse
 from dataclasses import asdict
 from datetime import date
 import json
@@ -11,12 +12,26 @@ from helpers.ReadingsFetcherDeon import get_bible_reading
 from models.Post import Post
 from views.ViewPost import ViewPost
 
+# App version.
+__version__ = '1.0.0'
+
 
 def SetupLogging():
     ''' Setup logging during application.'''
     loggingSetup(console_log_output='stdout', console_log_level='debug', console_log_color=True,
                  logfile_file='trace.log', logfile_log_level='debug', logfile_log_color=False,
                  log_line_template='%(color_on)s %(asctime)s [%(threadName)s] [%(levelname)-8s] %(message)s%(color_off)s')
+
+
+def SetupArgparse():
+    ''' Setup argparse during application. '''
+    parser = argparse.ArgumentParser(
+        description='Script for creating and posting media post.')
+    parser.add_argument('-np', '--nopost', action='store_true',
+                        help='No posting on social media.')
+    parser.add_argument('-v', '--version', action='version',
+                        version=f'{__version__}', help='Show version.')
+    return parser.parse_args()
 
 
 def PostCreate(database: PostDatabase):
@@ -67,6 +82,7 @@ def PostUpload(database: PostDatabase, post: Post):
 
 if __name__ == '__main__':
     SetupLogging()
+    args = SetupArgparse()
     database = PostDatabase()
 
     # Check : if post exists then read it
@@ -76,7 +92,7 @@ if __name__ == '__main__':
         post = PostCreate(database)
 
     # Check : Post is posted, do nothing.
-    if (database.IsPosted(date.today())):
+    if (args.nopost) or (database.IsPosted(date.today())):
         logging.info('Post is already posted!')
         sys.exit(0)
 
