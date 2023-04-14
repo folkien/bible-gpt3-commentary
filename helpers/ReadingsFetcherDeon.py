@@ -71,7 +71,12 @@ def get_bible_reading():
     # Last is evangelium
     evangelium = readings[-1]
 
-    return Readings(first_reading, psalm, second_reading, gospel, evangelium)
+    return Readings(url=url,
+                    first_reading=first_reading,
+                    psalm=psalm,
+                    second_reading=second_reading,
+                    gospel=gospel,
+                    evangelium=evangelium)
 
 
 if __name__ == '__main__':

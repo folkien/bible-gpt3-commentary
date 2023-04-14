@@ -19,10 +19,13 @@ def post_to_social_media(postText: str,
     social = SocialPost(apikey)
     # Post to Platforms Twitter, Facebook, and LinkedIn
     postResult = social.post({'post': postText,
-                              'platforms': platforms})
+                              'platforms': platforms,
+                              'mediasUrl': [imageUrl],
+                              })
     return postResult
 
 
 if __name__ == '__main__':
-    result = post_to_social_media('Test post from AYRshare API.')
+    result = post_to_social_media(
+        'Litwo ojczyzno moja ty jestes jak zdrowie ile cie kocham ten tylko sie dowie kto cie stracil')
     print(result)

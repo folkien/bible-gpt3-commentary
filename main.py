@@ -27,6 +27,8 @@ def SetupArgparse():
     ''' Setup argparse during application. '''
     parser = argparse.ArgumentParser(
         description='Script for creating and posting media post.')
+    parser.add_argument('-f', '--force', action='store_true',
+                        help='Force to create post again.')
     parser.add_argument('-np', '--nopost', action='store_true',
                         help='No posting on social media.')
     parser.add_argument('-v', '--version', action='version',
@@ -88,7 +90,7 @@ if __name__ == '__main__':
     # Check : if post exists then read it
     post = database.GetPost(date.today())
     # Create post if not exists
-    if (not database.IsCreated(date.today())):
+    if (args.force) or (not database.IsCreated(date.today())):
         post = PostCreate(database)
 
     # Check : Post is posted, do nothing.

@@ -10,6 +10,7 @@ from dataclasses import dataclass
 @dataclass
 class Readings:
     ''' Bible readings dataclass.'''
+    url: str = ''
     first_reading: str = None
     psalm: str = None
     second_reading: str = None
