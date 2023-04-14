@@ -2,6 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 import logging
 
+from helpers.Readings import Readings
+
 
 def get_bible_reading():
     ''' Pobiera czytanie z deon.pl'''
@@ -26,13 +28,50 @@ def get_bible_reading():
         logging.error(f'Problem z analizą składni HTML: {e}')
         return None
 
+    # Pobierz div z czytaniami
     readings_div = soup.find('div', class_='readings-module')
-
     if readings_div is None:
         logging.error('Nie znaleziono diva z czytaniami')
         return None
 
-    return readings_div.text.strip()
+    # Found info
+    info_div = readings_div.find('div', class_='info')
+    if info_div is None:
+        logging.warning('Info div not found!')
+
+    # Found content
+    content_div = readings_div.find('div', class_='element-content')
+    if content_div is None:
+        logging.error('Content div not found!')
+        return None
+
+    # Get all H4
+    h4s = content_div.find_all('h4')
+    # Get all paragraphs
+    paragraphs = content_div.find_all('p')
+    # Merge title with paragrahps as text only
+    readings = [f'{h4.text.strip()} {p.text.strip()}' for h4,
+                p in zip(h4s, paragraphs)]
+
+    # Check : 4 readings or more
+    if (len(readings) < 4):
+        logging.error('Invalid readings amount!')
+        return None
+
+    # First reading is first element,
+    first_reading = readings[0]
+    # Psalm is second element
+    psalm = readings[1]
+    # Second reading is third element (only if 5 readings)
+    second_reading = None
+    if (len(readings) == 5):
+        second_reading = readings[2]
+    # Gospel is fourth element
+    gospel = readings[-2]
+    # Last is evangelium
+    evangelium = readings[-1]
+
+    return Readings(first_reading, psalm, second_reading, gospel, evangelium)
 
 
 if __name__ == '__main__':

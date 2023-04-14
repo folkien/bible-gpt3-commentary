@@ -133,3 +133,4 @@ python3.8/
 .settings/
 .env
 .vscode/
+temp/*
