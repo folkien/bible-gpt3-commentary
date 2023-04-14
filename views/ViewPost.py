@@ -13,14 +13,14 @@ class ViewPost:
 
         content = ''
         content += f'# Tytuł : {post.commentary.title}\n\n'
-        content += f"'''{post.commentary.quote}'''\n\n"
+        content += f"    '''{post.commentary.quote}'''\n\n"
         content += f'# Główne myśli\n\n'
         for index, point in enumerate(post.commentary.points):
             content += f'{index + 1}. {point}\n'
         content += f'\n\n'
         content += f'# Ewangelia na dziś\n\n {post.readings.evangelium}\n\n'
-        content += f'# Komentarz\n\n {post.commentary.comment}\n\n'
-        content += f'Zapamiętaj : \n\n {post.commentary.summary}\n\n'
+        content += f'# Komentarz\n\n    {post.commentary.comment}\n\n'
+        content += f'# Zapamiętaj\n\n    {post.commentary.summary}\n\n'
 
         # Add Disclaimer
         content += f'------------------------\n\n'
