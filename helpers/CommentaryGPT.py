@@ -15,7 +15,7 @@ if (openai.api_key is None):
 def get_gpt_test(text: str, model: str = 'gpt-3.5-turbo', temperature: float = 0.7):
     # Chat GPT messages content
     messages = [
-        {'role': 'system', 'content': 'Komentujesz czytania biblijne. Jesteś katolickim teologiem i biblistą.'},
+        {'role': 'system', 'content': 'Jesteś katolickim teologiem, biblistą, który komentuje biblię. Szuka głębi w tekście, alegorii, duchowych odniesień.'},
         {'role': 'user', 'content': f'Napisz komentarz do tekstu : ' +
                                     f'Albowiem tak Bóg umiłościł świat, że dał jedynego Syna swojego, aby każdy, kto w Niego wierzy, nie zginął, lecz miał wieczne życie.'},
     ]
@@ -29,13 +29,17 @@ def get_gpt_test(text: str, model: str = 'gpt-3.5-turbo', temperature: float = 0
     return response
 
 
-def get_gpt_commentary(text: str, model: str = 'gpt-3.5-turbo', temperature: float = 0.7):
+def get_gpt_commentary(text: str, model: str = 'gpt-3.5-turbo', temperature: float = 0.5):
     # Chat GPT messages content
     messages = [
-        {'role': 'system', 'content': 'Komentujesz czytania biblijne. Jesteś katolickim teologiem i biblistą.'},
-        {'role': 'user', 'content': f'Skomentuj tekst czytania jako json gdzie pola to (w nawiasie nazwa pola)  : ' +
-                                    f'1.(title) Tytuł komentarza, 2.(quote) cytat świętego kościoła, 3. (points) Trzy najwazniejsze myśli z czytania, ' +
-                                    f'4. (comment) akapit z komentarzem, 5. (summary) myśl podsumowująca.\n Oto czytanie: ${text}'},
+        {'role': 'system', 'content': 'Jesteś kreatywnym, katolickim teologiem i biblistą. Szukasz duchowości, serca, poruszenia, charyzmatów, alegorii, drugiego znaczenia, historii ludzi i postaci. Tłumaczysz pisma.'},
+        {'role': 'user', 'content': f'Odpowiedz w formie jsona gdzie pola to :\n' +
+                                    f'- title : kreatywny tytuł nie wprost,\n' +
+                                    f'- quote : twój pasujący cytat świętej osoby i nazwa autora,\n' +
+                                    f'- points : 3 najwazniejsze myśli z czytania,\n' +
+                                    f'- comment: akapit z twoim komentarzem,\n' +
+                                    f'- summary: niewprost, najważniejsze zdanie podsumowujące.\n' +
+                                    f'Skomentuj czytanie: ${text}'},
     ]
 
     # Debugging

@@ -27,10 +27,10 @@ class ViewPost:
         content += f'Czytania z dnia pobrano ze strony : {post.readings.url} \n'
         content += f'Uwaga! Powyższy tekst został wygenerowany automatycznie przy użyciu modelu GPT firmy OpenAI. '
         content += f'Komentarz nie jest w żaden sposób oficjalną wypowiedzią Kościoła Katolickiego, ani komentarzem bilisty, '
-        content += f'ani nie posiada żadnego autorytetu teologicznego. Jest to jedynie demo technologiczne próbujące '
+        content += f'ani nie posiada żadnego autorytetu teologicznego oraz nie jest wiarygodnym źródłem danych/cytatów. Jest to jedynie demo technologiczne próbujące '
         content += f'pokazać możliwości sztucznej inteligencji. Autorzy projektu nie ponoszą żadnej odpowiedzialności za treść komentarza '
         content += f'oraz za ewentualne błędy w nim zawarte.\n\n'
         content += f'Repozytorium projektu https://github.com/folkien/bible-gpt3-commentary \n'
-        content += f'Projekt Bible-Gpt3-Commentary jest projektem nonprofit open source! Zapraszamy do współpracy!'
+        content += f'Projekt Bible-Gpt3-Commentary jest projektem nonprofit open source. Zapraszam do współpracy!'
 
         return content
