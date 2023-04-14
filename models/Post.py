@@ -2,9 +2,10 @@
     Dataclass for readings and commentary media post.
 
 '''
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from models.Commentary import Commentary
 from models.Readings import Readings
+from datetime import date
 
 
 @dataclass
@@ -12,6 +13,7 @@ class Post:
     ''' Dataclass for readings and commentary media post.'''
     readings: Readings = None
     commentary: Commentary = None
+    date: date = field(init=False, default_factory=date.today)
 
     def __post_init__(self):
         ''' Checks if all fields are not None '''

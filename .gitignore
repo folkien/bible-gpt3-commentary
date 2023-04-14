@@ -134,3 +134,4 @@ python3.8/
 .env
 .vscode/
 temp/*
+database/*
