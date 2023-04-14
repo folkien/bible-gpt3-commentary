@@ -10,15 +10,18 @@ A OpenAI GPT powered commentary to the daily readings of Bible.
 pip install -r requirements.txt
 ```
 
-2. Use env template to create your own env file. Add OpenAI API key to the env file.
+2. Use env template to create your own env file.
 
 ```bash
 cp .env.template .env
 ```
 
+3. Add OpenAI API key to the `.env` file.
+
 # Usage - Run the script
 
 ```bash
+source .env
 python main.py
 ```
 

@@ -1,6 +1,3 @@
-import requests
-from bs4 import BeautifulSoup
-import openai
 
 
 def post_to_facebook(comment, image_url):
@@ -13,12 +10,3 @@ def post_to_facebook(comment, image_url):
         'link': image_url,
     }
     graph.put_wall_post('', attachment=attachment, profile_id=page_id)
-
-
-def main():
-    ''' Pobiera czytanie z deon.pl'''
-    #post_to_facebook(gpt4_comment, dalle2_image_url)
-
-
-if __name__ == '__main__':
-    main()
