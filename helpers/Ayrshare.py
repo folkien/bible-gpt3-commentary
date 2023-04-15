@@ -20,7 +20,6 @@ def post_to_social_media(postText: str,
     # Post to Platforms Twitter, Facebook, and LinkedIn
     postResult = social.post({'post': postText,
                               'platforms': platforms,
-                              'mediasUrl': [imageUrl],
                               })
     return postResult
 
