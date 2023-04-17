@@ -2,9 +2,8 @@
 Description=Run everyday
 
 [Timer]
-OnBootSec=15m
-OnUnitActiveSec=24h
 Unit=gptbible.service
+OnCalendar=*-*-* 07:00:00
 Persistent=true
 
 [Install]
