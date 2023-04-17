@@ -32,14 +32,22 @@ def get_gpt_test(text: str, model: str = 'gpt-3.5-turbo', temperature: float = 0
 def get_gpt_commentary(text: str, model: str = 'gpt-3.5-turbo', temperature: float = 0.5):
     # Chat GPT messages content
     messages = [
-        {'role': 'system', 'content': 'Jesteś kreatywnym, katolickim teologiem i biblistą. Szukasz duchowości, serca, poruszenia, charyzmatów, alegorii, drugiego znaczenia, historii ludzi i postaci. Tłumaczysz pisma.'},
-        {'role': 'user', 'content': f'Odpowiedz w formie jsona gdzie pola to :\n' +
+        {'role': 'system', 'content': 'Jesteś katolickim teologiem i biblistą.' +
+                                      'Szukasz duchowości, charyzmatów, alegorii,' +
+                                      'głębi znaczenia, kontekstu biblijnego, historii postaci oraz wyjaśnienia przykładów.' +
+                                      'Skup się na postaciach, ich sytuacji, ich relacji, przesłaniu, ' +
+                                      'wnioskach dla czytającego.'},
+        {'role': 'user', 'content': f'Odpowiedz tylko jako json. Opis pól:' +
                                     f'- title : kreatywny tytuł nie wprost,\n' +
-                                    f'- quote : twój pasujący cytat świętej osoby i nazwa autora,\n' +
+                                    f'- location : miejsce akcji (np dach, dom, las),\n' +
+                                    f'- people : imiona postaci,\n' +
+                                    f'- quote : pasujący cytat świętej osoby,\n' +
+                                    f'- quote_author : autor powyższego cytatu,\n' +
                                     f'- points : 3 najwazniejsze punkty czytania,\n' +
-                                    f'- comment: 1-2 akapity z twoim komentarzem,\n' +
+                                    f'- comment: kilka zdań wyjaśnienia,\n' +
+                                    f'- conclusions : 3 wnioski dla wierzącego,\n' +
                                     f'- summary: niewprost, najważniejsze zdanie podsumowujące.\n' +
-                                    f'Skomentuj czytanie: ${text}'},
+                                    f'Tekst : ${text}'},
     ]
 
     # Debugging
