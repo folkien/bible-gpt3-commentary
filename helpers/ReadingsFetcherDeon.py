@@ -39,6 +39,22 @@ def get_bible_reading():
     if info_div is None:
         logging.warning('Info div not found!')
 
+    # Livery color <p> found
+    livery_color = ''
+    livery_color_div = info_div.find('p', class_='livery-color')
+    if (livery_color_div is not None):
+        livery_color = livery_color_div.text.strip()
+    # Liturgical year <p> found
+    liturgical_year = ''
+    liturgical_year_div = info_div.find('p', class_='year')
+    if (liturgical_year_div is not None):
+        liturgical_year = liturgical_year_div.text.strip()
+    # Liturgical week <p> found
+    liturgical_week = ''
+    liturgical_week_div = info_div.find('p', class_='week')
+    if (liturgical_week_div is not None):
+        liturgical_week = liturgical_week_div.text.strip()
+
     # Found content
     content_div = readings_div.find('div', class_='element-content')
     if content_div is None:
@@ -72,6 +88,9 @@ def get_bible_reading():
     evangelium = readings[-1]
 
     return Readings(url=url,
+                    livery_color=livery_color,
+                    liturgical_year=liturgical_year,
+                    liturgical_week=liturgical_week,
                     first_reading=first_reading,
                     psalm=psalm,
                     second_reading=second_reading,

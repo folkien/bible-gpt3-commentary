@@ -19,11 +19,23 @@ def CompactString(string: str):
 @dataclass
 class Readings:
     ''' Bible readings dataclass.'''
+    # Url of readings
     url: str = ''
+    # Livery color
+    livery_color: str = None
+    # Liturgical year
+    liturgical_year: str = None
+    # liturgical week
+    liturgical_week: str = None
+    # First reading
     first_reading: str = None
+    # Psalm
     psalm: str = None
+    # Second reading
     second_reading: str = None
+    # Gospel
     gospel: str = None
+    # Evangelium
     evangelium: str = None
 
     def __post_init__(self):
@@ -33,6 +45,11 @@ class Readings:
 
         # Compacted version of evangelium
         self.evangelium = CompactString(self.evangelium)
+
+    @property
+    def liturgical_info(self):
+        ''' Returns liturgical info '''
+        return f'{self.liturgical_week}, {self.liturgical_year}'
 
 
 if __name__ == '__main__':

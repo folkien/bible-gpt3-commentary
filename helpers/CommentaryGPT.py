@@ -36,8 +36,8 @@ def get_gpt_commentary(text: str, model: str = 'gpt-3.5-turbo', temperature: flo
         {'role': 'user', 'content': f'Odpowiedz w formie jsona gdzie pola to :\n' +
                                     f'- title : kreatywny tytuł nie wprost,\n' +
                                     f'- quote : twój pasujący cytat świętej osoby i nazwa autora,\n' +
-                                    f'- points : 3 najwazniejsze myśli z czytania,\n' +
-                                    f'- comment: akapit z twoim komentarzem,\n' +
+                                    f'- points : 3 najwazniejsze punkty czytania,\n' +
+                                    f'- comment: 1-2 akapity z twoim komentarzem,\n' +
                                     f'- summary: niewprost, najważniejsze zdanie podsumowujące.\n' +
                                     f'Skomentuj czytanie: ${text}'},
     ]
