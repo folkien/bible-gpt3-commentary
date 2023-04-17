@@ -70,6 +70,7 @@ def get_gpt_commentary(text: str, model: str = 'gpt-3.5-turbo', temperature: flo
 
     # Convert jsonCommentary to Commentary dataclass from json.
     commentary = Commentary(**jsonCommentary)
+    commentary.aimodel = model
 
     return commentary
 

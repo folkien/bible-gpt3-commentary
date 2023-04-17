@@ -9,10 +9,17 @@ from dataclasses import dataclass
 @dataclass
 class Commentary:
     ''' Bible readings commentary dataclass'''
+    # OpenAI model used to generate commentary
+    aimodel: str = None
+    # Commentary title
     title: str = None
+    # Commentary single day quote
     quote: str = None
+    # Commentary main points
     points: list = None
+    # Commentary comment
     comment: str = None
+    # Commentary summary
     summary: str = None
 
     def __post_init__(self):
