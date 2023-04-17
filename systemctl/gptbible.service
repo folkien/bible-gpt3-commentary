@@ -1,0 +1,6 @@
+[Unit]
+Description="GPT bible service"
+
+[Service]
+ExecStart=/bin/bash  /usr/bin/gptbible.sh
+EnvironmentFile=/usr/bin/gptbible.env

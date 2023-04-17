@@ -3,8 +3,9 @@ Description=Run everyday
 
 [Timer]
 OnBootSec=15m
-OnCalendar=00/24:00
-Unit=everyday.service
+OnUnitActiveSec=24h
+Unit=gptbible.service
+Persistent=true
 
 [Install]
 WantedBy=timers.target
