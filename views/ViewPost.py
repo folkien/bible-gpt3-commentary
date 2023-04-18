@@ -16,13 +16,15 @@ class ViewPost:
         content += f"    '''{post.commentary.quote_with_author}'''\n\n"
         content += f'# Streszczenie \n\n'
         content += f'Miejsce akcji : {post.commentary.action_place}\n'
-        content += f'Osoby : {post.commentary.people_names}\n'
+        content += f'Osoby : {post.commentary.people_names}\n\n'
         for index, point in enumerate(post.commentary.points):
             content += f'{index + 1}. {point}\n'
         content += f'\n\n'
         content += f'# Ewangelia na dziś (pobrano ze strony {post.readings.url})\n\n    {post.readings.evangelium}\n\n'
         content += f'# Komentarz\n\n    {post.commentary.comment}\n\n'
-        content += f'# Wnioski\n\n    {post.commentary.conclusions}\n\n'
+        content += f'# Wnioski\n\n'
+        for index, point in enumerate(post.commentary.conclusions):
+            content += f' -  {point}\n'
         content += f'# Zapamiętaj\n\n    {post.commentary.summary}\n\n'
 
         # Add Disclaimer
