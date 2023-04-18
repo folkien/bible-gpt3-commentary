@@ -25,6 +25,7 @@ class ViewPost:
         content += f'# Wnioski\n\n'
         for index, point in enumerate(post.commentary.conclusions):
             content += f' -  {point}\n'
+        content += f'\n\n'
         content += f'# Zapamiętaj\n\n    {post.commentary.summary}\n\n'
 
         # Add Disclaimer

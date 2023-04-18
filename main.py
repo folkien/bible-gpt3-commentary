@@ -66,7 +66,7 @@ def PostCreate(database: PostDatabase):
     return post
 
 
-def PostUpload(database: PostDatabase, post: Post):
+def PostView(post: Post) -> str:
     ''' Upload post. '''
     # Create post text/view
     postText = ViewPost.View(post)
@@ -75,11 +75,17 @@ def PostUpload(database: PostDatabase, post: Post):
     with open('temp/post.txt', 'w') as fileObject:
         fileObject.write(postText)
 
+    return postText
+
+def PostUpload(database: PostDatabase, postText: str):
+    ''' Upload post. '''
     result = post_to_social_media(postText)
 
     # Database : Save posted post
     if (result):
         database.AddPosted(post)
+
+    return result
 
 
 if __name__ == '__main__':
@@ -93,10 +99,17 @@ if __name__ == '__main__':
     if (args.force) or (not database.IsCreated(date.today())):
         post = PostCreate(database)
 
+    # Create post View/text
+    postText = PostView(post)
+
+    # Show post if verbose or nopost.
+    if (args.nopost) or (args.verbose):
+        logging.info(f"\n{postText}")
+
     # Check : Post is posted, do nothing.
     if (args.nopost) or (database.IsPosted(date.today())):
-        logging.info('Post is already posted!')
+        logging.warning('Post is already posted!')
         sys.exit(0)
 
     # Upload post.
-    PostUpload(database, post)
+    PostUpload(database, postText)
