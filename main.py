@@ -31,6 +31,8 @@ def SetupArgparse():
                         help='Force to create post again.')
     parser.add_argument('-np', '--nopost', action='store_true',
                         help='No posting on social media.')
+    parser.add_argument('-ve', '--verbose', action='store_true',
+                        help='Verbose operating.')
     parser.add_argument('-v', '--version', action='version',
                         version=f'{__version__}', help='Show version.')
     return parser.parse_args()
