@@ -7,7 +7,7 @@ sudo cp -rfv systemctl/gptbible.env /usr/bin/
 # Create run script and install
 echo "cd $(pwd)" > systemctl/gptbible.sh
 echo "source .env" >> systemctl/gptbible.sh
-echo "python main.py" >> systemctl/gptbible.sh
+echo "python3 main.py" >> systemctl/gptbible.sh
 chmod a+x systemctl/gptbible.sh
 sudo cp -rfv systemctl/gptbible.sh /usr/bin/
 
