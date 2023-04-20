@@ -3,6 +3,7 @@
 
 '''
 from models.Post import Post
+from datetime import date
 
 
 class ViewPost:
@@ -12,7 +13,7 @@ class ViewPost:
         ''' View creates string/markdown representation of media post. '''
 
         content = ''
-        content += f'# Tytuł : {post.commentary.title} / {post.readings.liturgical_info}\n\n'
+        content += f'# Tytuł : {post.commentary.title} / {post.readings.creationDate.strftime("%d %B")}, {post.readings.liturgical_info}\n\n'
         content += f"    '''{post.commentary.quote_with_author}'''\n\n"
         content += f'# Streszczenie \n\n'
         content += f'Miejsce akcji : {post.commentary.action_place}\n'
@@ -27,6 +28,9 @@ class ViewPost:
             content += f' -  {point}\n'
         content += f'\n\n'
         content += f'# Zapamiętaj\n\n    {post.commentary.summary}\n\n'
+
+        # Add tags
+        content += f'#ewangelia #wiara #komentarz #ChatGPT #gpt3 #ai #bible #biblia #komentarz\n\n'
 
         # Add Disclaimer
         content += f'------------------------\n\n'

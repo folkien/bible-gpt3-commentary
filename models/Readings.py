@@ -4,7 +4,8 @@
 
 '''
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+from datetime import date
 
 
 def CompactString(string: str):
@@ -21,6 +22,8 @@ class Readings:
     ''' Bible readings dataclass.'''
     # Url of readings
     url: str = ''
+    # Date of readings
+    creationDate: date = field(init=True, default_factory=date.today)
     # Livery color
     livery_color: str = None
     # Liturgical year
@@ -42,6 +45,9 @@ class Readings:
         ''' At least evangelium must be not None '''
         if (self.evangelium is None):
             raise ValueError('Evangelium is None!')
+
+        if (isinstance(self.creationDate, str)):
+            self.creationDate = date.fromisoformat(self.creationDate)
 
         # Compacted version of evangelium
         self.evangelium = CompactString(self.evangelium)

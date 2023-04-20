@@ -1,6 +1,6 @@
 import argparse
-from dataclasses import asdict
-from datetime import date
+from dataclasses import asdict, dataclass, is_dataclass
+from datetime import date, datetime, timedelta
 import json
 import logging
 import sys
@@ -14,6 +14,30 @@ from views.ViewPost import ViewPost
 
 # App version.
 __version__ = '1.0.0'
+
+
+class EnhancedJSONEncoder(json.JSONEncoder):
+    '''Enhanced JSON encoder with dataclasses support.'''
+
+    def default(self, o):
+        ''' Method to default dataclass.'''
+        # Set : Json
+        if (isinstance(o, (set))):
+            return list(o)
+
+        # Dataclass : Json.
+        if is_dataclass(o):
+            return asdict(o)
+
+        # Datetime : Json
+        if (isinstance(o, (datetime, date))):
+            return o.isoformat()
+
+        # Timedelta : Json
+        if (isinstance(o, timedelta)):
+            return str(o.total_seconds())
+
+        return super().default(o)
 
 
 def SetupLogging():
@@ -48,7 +72,7 @@ def PostCreate(database: PostDatabase):
 
     # Save temporary object (developer debuging)
     json.dump(asdict(readings), open('temp/readings.json', 'w'),
-              indent=4, ensure_ascii=False)
+              indent=4, ensure_ascii=False, cls=EnhancedJSONEncoder)
 
     # Comment only evangelium
     commentary = get_gpt_commentary(readings.evangelium)
@@ -58,7 +82,7 @@ def PostCreate(database: PostDatabase):
 
     # Save temporary object (developer debuging)
     json.dump(asdict(commentary), open('temp/commentary.json', 'w'),
-              indent=4, ensure_ascii=False)
+              indent=4, ensure_ascii=False, cls=EnhancedJSONEncoder)
 
     # Create media post
     post = Post(readings=readings, commentary=commentary)
@@ -78,6 +102,7 @@ def PostView(post: Post) -> str:
         fileObject.write(postText)
 
     return postText
+
 
 def PostUpload(database: PostDatabase, postText: str):
     ''' Upload post. '''
@@ -106,7 +131,7 @@ if __name__ == '__main__':
 
     # Show post if verbose or nopost.
     if (args.nopost) or (args.verbose):
-        logging.info(f"\n{postText}")
+        logging.info(f'\n{postText}')
 
     # Check : Post is posted, do nothing.
     if (args.nopost) or (database.IsPosted(date.today())):
