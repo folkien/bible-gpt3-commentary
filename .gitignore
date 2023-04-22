@@ -137,3 +137,4 @@ temp/*
 database/*
 systemctl/gptbible.env
 systemctl/gptbible.sh
+env3.8/
