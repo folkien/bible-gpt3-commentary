@@ -17,6 +17,7 @@ logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 logging.getLogger().addHandler(logging.StreamHandler(stream=sys.stdout))
 
 
+
 # Data set load and create if not exists
 db_index = None
 if (not os.path.exists('trainingdata/sesa.json')):
@@ -28,3 +29,9 @@ if (not os.path.exists('trainingdata/sesa.json')):
 if (db_index is None):
     logging.info('Loading database...')
     db_index = GPTSimpleVectorIndex.load_from_disk('trainingdata/sesa.json')
+
+prompt = input("Podaje zapytanie do ewangelizatora:")
+response = db_index.query(prompt)
+
+print("Odpowiedź: " + str(response))
+print("Źródła : "+ response.get_formatted_sources())
