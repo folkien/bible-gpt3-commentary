@@ -4,6 +4,7 @@ llama_index.
 '''
 import logging
 import sys
+import os 
 from llama_index import (
     GPTSimpleVectorIndex, 
     GPTSimpleKeywordTableIndex, 
@@ -26,4 +27,4 @@ if (not os.path.exists('trainingdata/sesa.json')):
 
 if (db_index is None):
     logging.info('Loading database...')
-    db_index = GPTSimpleVectorIndex.('trainingdata/sesa.json')
+    db_index = GPTSimpleVectorIndex.load_from_disk('trainingdata/sesa.json')
