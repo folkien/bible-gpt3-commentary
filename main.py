@@ -75,7 +75,7 @@ def PostCreate(database: PostDatabase):
               indent=4, ensure_ascii=False, cls=EnhancedJSONEncoder)
 
     # Comment only evangelium
-    commentary = get_gpt_commentary(readings.evangelium)
+    commentary = get_gpt_commentary(readings)
     if (commentary is None):
         logging.fatal('Commentary : Cannot get commentary!')
         sys.exit(-1)
