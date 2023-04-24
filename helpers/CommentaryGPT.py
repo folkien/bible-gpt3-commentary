@@ -3,13 +3,8 @@ from dataclasses import asdict
 import ast
 import logging
 import os
-import openai
+import helpers.GptChat as GptChat
 from models.Commentary import Commentary
-
-# Get Open AI key from env
-openai.api_key = os.environ.get('OPENAI_API_KEY', None)
-if (openai.api_key is None):
-    raise ValueError('Open AI key not found in env.')
 
 
 def get_gpt_test(text: str, model: str = 'gpt-3.5-turbo', temperature: float = 0.7):
@@ -21,9 +16,9 @@ def get_gpt_test(text: str, model: str = 'gpt-3.5-turbo', temperature: float = 0
     ]
 
     # Send request to Open AI
-    response = openai.ChatCompletion.create(model=model,
-                                            messages=messages,
-                                            temperature=temperature)
+    response = GptChat.GptPrompt(model=model,
+                                 messages=messages,
+                                 temperature=temperature)
 
     print(response)
     return response
@@ -37,7 +32,7 @@ def get_gpt_commentary(text: str, model: str = 'gpt-3.5-turbo', temperature: flo
                                       'głębi znaczenia, kontekstu biblijnego, historii postaci oraz wyjaśnienia przykładów.' +
                                       'Skup się na postaciach, ich sytuacji, ich relacji, przesłaniu, ' +
                                       'wnioskach dla czytającego.'},
-        {'role': 'user', 'content': f'Odpowiedz tylko jako json. Opis pól:' +
+        {'role': 'user', 'content': f'Odpowiedz tylko jako json. Opis pól:\n' +
                                     f'- title : kreatywny tytuł nie wprost,\n' +
                                     f'- location : miejsce akcji (np dach, dom, las),\n' +
                                     f'- people : imiona postaci,\n' +
@@ -47,18 +42,16 @@ def get_gpt_commentary(text: str, model: str = 'gpt-3.5-turbo', temperature: flo
                                     f'- comment: kilka zdań wyjaśnienia,\n' +
                                     f'- conclusions : 3 wnioski dla wierzącego,\n' +
                                     f'- summary: niewprost, najważniejsze zdanie podsumowujące.\n' +
-                                    f'Tekst : ${text}'},
+                                    f'Tekst : {text}'},
     ]
 
     # Debugging
-    logging.debug('Messagees list : ')
-#    logging.debug(messages)
-    logging.debug('Used open ai key %s', openai.api_key)
+    logging.debug('Messages list : ')
 
     # Send request to Open AI
-    response = openai.ChatCompletion.create(model=model,
-                                            messages=messages,
-                                            temperature=temperature)
+    response = GptChat.GptPrompt(model=model,
+                                 messages=messages,
+                                 temperature=temperature)
 
     # Check : Invalid response
     if (response is None) or ('choices' not in response) or (len(response['choices']) == 0):
