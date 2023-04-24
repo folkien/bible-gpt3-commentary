@@ -8,8 +8,11 @@ from dataclasses import dataclass, field
 from datetime import date
 
 
-def CompactString(string: str):
+def CompactString(string: str) -> str:
     ''' Compact string '''
+    if (string is None):
+        return None
+
     return string.replace('  ', '')\
                  .replace('\n', '')\
                  .replace('\t', '')\
@@ -48,6 +51,18 @@ class Readings:
 
         if (isinstance(self.creationDate, str)):
             self.creationDate = date.fromisoformat(self.creationDate)
+
+        # Compact first reading
+        self.first_reading = CompactString(self.first_reading)
+
+        # Compact psalm
+        self.psalm = CompactString(self.psalm)
+
+        # Compact second reading
+        self.second_reading = CompactString(self.second_reading)
+
+        # Compact gospel
+        self.gospel = CompactString(self.gospel)
 
         # Compacted version of evangelium
         self.evangelium = CompactString(self.evangelium)

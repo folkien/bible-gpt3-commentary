@@ -16,14 +16,18 @@ class ViewPost:
         content = ''
         content += f'# Tytuł : {post.commentary.title} / {post.readings.creationDate.strftime("%d %B")}, {post.readings.liturgical_info}\n\n'
         content += f"    '''{post.commentary.quote_with_author}'''\n\n"
-        content += f'# Streszczenie \n\n'
+        content += f'# Co dzisiaj w Ewangelii? \n\n'
         content += f'Miejsce akcji : {post.commentary.action_place}\n'
         content += f'Osoby : {post.commentary.people_names}\n\n'
         for index, point in enumerate(post.commentary.points):
             content += f'{index + 1}. {point}\n'
         content += f'\n\n'
-        content += f'# Ewangelia na dziś (pobrano ze strony {post.readings.url})\n\n    {post.readings.evangelium}\n\n'
-        content += f'# Komentarz\n\n    {post.commentary.comment}\n\n'
+        content += f'# Czytania na dziś (pobrano ze strony {post.readings.url})\n\n'
+        content += f'    {post.readings.first_reading}\n\n'
+        if (post.readings.second_reading is not None):
+            content += f'    {post.readings.second_reading}\n\n'
+        content += f'    {post.readings.evangelium}\n\n'
+        content += f'# Komentarz do Ewangelii.\n\n    {post.commentary.comment}\n\n'
         content += f'# Wnioski\n\n'
         for index, point in enumerate(post.commentary.conclusions):
             content += f' -  {point}\n'
