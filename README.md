@@ -1,4 +1,7 @@
-# bible-gpt3-commentary
+![title](doc/title.png)
+
+# Bible readings GPT commentary!
+
 A OpenAI GPT powered commentary to the daily readings of Bible.
 
 
