@@ -23,5 +23,11 @@ class Post:
         if (self.commentary is None):
             raise ValueError('Commentary is None!')
 
+        if (isinstance(self.readings, (dict))):
+            self.readings = Readings(**self.readings)
+
+        if (isinstance(self.commentary, (dict))):
+            self.commentary = Commentary(**self.commentary)
+
         if (isinstance(self.date, (str))):
             self.date = date.fromisoformat(self.date)

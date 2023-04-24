@@ -2,6 +2,7 @@
     View of media post for readings and commentary.
 
 '''
+from helpers.git import GetGitBranchRev
 from models.Post import Post
 from datetime import date
 
@@ -36,6 +37,7 @@ class ViewPost:
         content += f'------------------------\n\n'
         content += f'Czytania z dnia pobrano ze strony {post.readings.url}\n'
         content += f'Komentarz wygenerowano przy użyciu modelu {post.commentary.aimodel}.\n'
+        content += f'Użyto bible-gpt-commentary w rewizji {GetGitBranchRev()}.\n'
         content += f'Uwaga! Poza tekstem czytań, pozostały tekst został wygenerowany automatycznie przy użyciu modelu GPT firmy OpenAI. '
         content += f'Komentarz nie jest w żaden sposób oficjalną wypowiedzią Kościoła Katolickiego, ani komentarzem biblisty, '
         content += f'ani nie posiada żadnego autorytetu teologicznego oraz nie jest wiarygodnym źródłem danych/cytatów. Jest to jedynie demo technologiczne próbujące '
