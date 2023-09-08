@@ -1,4 +1,6 @@
 #!/bin/bash
+# Ask user if virtualenv was .env was sourced?
+read -p "Did you sourced .env before installation (must have)? (y/n) " -n 1 -r
 
 # Create env script and install
 env > systemctl/gptbible.env
